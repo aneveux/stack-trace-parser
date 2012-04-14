@@ -6,12 +6,12 @@ Parses Java stack traces and produces a simple Java object model representing th
 Use
 ---
 
-import com.jmolly.stacktraceparser.StackTraceParser;
-...
-String stackTrace = "...";
-NStackTrace result = StackTraceParser.parse(stackTrace);
+    import com.jmolly.stacktraceparser.StackTraceParser;
+    ...
+    String stackTrace = "...";
+    NStackTrace result = StackTraceParser.parse(stackTrace);
 
 Build
 -----
 
-mvn clean package
+    mvn clean package
