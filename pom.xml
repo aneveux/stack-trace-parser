@@ -7,9 +7,24 @@
     <groupId>com.jmolly.java</groupId>
     <artifactId>stack-trace-parser</artifactId>
     <version>0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>Stack Trace Parser</name>
-    <url>http://www.jmolly.com/</url>
+    <description>Parses Java Exception stack traces (and jstack output).</description>
+    <url>https://github.com/jmolly/stack-trace-parser</url>
+
+    <scm>
+        <connection>git@github.com:jmolly/stack-trace-parser.git</connection>
+        <url>https://github.com/jmolly/stack-trace-parser</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Aaron</name>
+            <email>aaron@jmolly.com</email>
+            <organizationUrl>http://www.jmolly.com/</organizationUrl>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>
