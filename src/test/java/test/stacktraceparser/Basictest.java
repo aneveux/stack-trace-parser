@@ -38,15 +38,10 @@ import java.io.IOException;
 import static org.testng.Assert.assertEquals;
 
 @Test
-public class StackTraceParserTest {
-
-    // for ides that don't support testng
-    public static void main(String[] args) throws Exception {
-        new StackTraceParserTest().testParser();
-    }
+public class BasicTest {
 
     public void testParser() throws IOException, RecognitionException {
-        NStackTrace result = StackTraceParser.parse(loadString("StackTrace.txt"));
+        NStackTrace result = StackTraceParser.parse(loadString("Basic.txt"));
         assertEquals(result.getThreadName(), "main");
         assertEquals(result.getTrace().getException().getClassName(), "java.lang.RuntimeException");
         assertEquals(result.getTrace().getException().getMessage(), ": java.lang.reflect.InvocationTargetException");
@@ -73,7 +68,7 @@ public class StackTraceParserTest {
 
     private static String loadString(String resource) {
         try {
-            return IOUtils.toString(StackTraceParserTest.class.getResourceAsStream(resource));
+            return IOUtils.toString(BasicTest.class.getResourceAsStream(resource));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

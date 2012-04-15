@@ -25,11 +25,11 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
  * OF SUCH DAMAGE.
  */
-parser grammar StackTraceParser;
+parser grammar STParser;
 
 options {
     output = AST;
-    tokenVocab = StackTraceLexer;
+    tokenVocab = STLexer;
 }
 
 tokens {
@@ -49,11 +49,11 @@ THR;
 }
 
 @header {
-package com.jmolly.stacktraceparser.guts;
+package com.jmolly.stacktraceparser.internal;
 }
 
-estack: EIT threadname classname msg=message? atlines cause? EOF
--> ^(ESTACK ^(THR threadname) ^(EXC ^(CLS classname) ^(MSG message?)) atlines cause?);
+estack: (EIT threadname)? classname? msg=message? atlines cause? EOF
+-> ^(ESTACK ^(THR threadname?) ^(EXC ^(CLS classname?) ^(MSG message?)) atlines cause?);
 
 threadname: QS;
 atlines: atline* -> ^(ATS atline*);

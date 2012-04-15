@@ -25,15 +25,15 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
  * OF SUCH DAMAGE.
  */
-tree grammar StackTraceTree;
+tree grammar STTree;
 
 options {
     ASTLabelType = CommonTree;
-    tokenVocab = StackTraceParser;
+    tokenVocab = STParser;
 }
 
 @header {
-package com.jmolly.stacktraceparser.guts;
+package com.jmolly.stacktraceparser.internal;
 import java.util.Stack;
 import com.jmolly.stacktraceparser.*;
 }
@@ -45,10 +45,10 @@ Stack<NTrace> traces = new Stack<NTrace>();
 
 estack
 @init {traces.push(NTrace.start());}
-: ^(ESTACK ^(THR t=.*) ^(EXC ^(CLS CNAME) ^(MSG MSGSTR?)) atlines cause?)
+: ^(ESTACK ^(THR t=.*) ^(EXC ^(CLS CNAME?) ^(MSG MSGSTR?)) atlines cause?)
 {NTrace curr = traces.pop();
 curr.setException(NException.create($CNAME.text,$MSGSTR.text));
-stackTrace=NStackTrace.withNameAndStack($t.getText(), curr);};
+stackTrace=NStackTrace.withNameAndStack($t==null?"":$t.getText(), curr);};
 
 atlines: ^(ATS atline*);
 atline: ^(AT ^(CLS CNAME) ^(METH MNAME) ^(LOC .*))
