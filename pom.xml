@@ -6,7 +6,7 @@
 
     <groupId>com.jmolly.java</groupId>
     <artifactId>stack-trace-parser</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
 
     <name>Stack Trace Parser</name>
     <url>http://www.jmolly.com/</url>
