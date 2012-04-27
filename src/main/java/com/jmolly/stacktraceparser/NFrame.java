@@ -50,4 +50,8 @@ public final class NFrame {
         return "Frame(" + className + "#" + methodName + ")";
     }
 
+    public String toPrettyString() {
+        return className + "." + methodName;
+    }
+
 }

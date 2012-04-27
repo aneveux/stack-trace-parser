@@ -54,4 +54,13 @@ public final class NException {
         return "Exception(" + className + "," + message + ")";
     }
 
+    public String toPrettyString() {
+        StringBuilder buf = new StringBuilder();
+        buf.append(className);
+        if (message != null) {
+            buf.append(": ").append(message);
+        }
+        return buf.toString();
+    }
+
 }

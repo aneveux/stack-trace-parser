@@ -54,4 +54,13 @@ public final class NStackTrace {
         return "Thread(" + threadName + "," + trace + ")";
     }
 
+    public String toPrettyString() {
+        StringBuilder buf = new StringBuilder();
+        if (threadName != null) {
+            buf.append("\"").append(threadName).append("\"").append(" ");
+        }
+        buf.append(trace.toPrettyString());
+        return buf.toString();
+    }
+
 }

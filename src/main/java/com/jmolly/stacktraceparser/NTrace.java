@@ -27,7 +27,6 @@
  */
 package com.jmolly.stacktraceparser;
 
-import java.lang.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,6 +70,20 @@ public final class NTrace {
     @Override
     public String toString() {
         return "Trace(" + exception + ",\n" + frames + ",\n" + nested + ")";
+    }
+
+    public String toPrettyString() {
+        StringBuilder buf = new StringBuilder();
+        if (exception != null) {
+            buf.append(exception.toPrettyString()).append("\n");
+        }
+        for (NFrame frame : frames) {
+            buf.append("\t").append(frame.toPrettyString()).append("\n");
+        }
+        if (nested != null) {
+            buf.append(nested.toPrettyString());
+        }
+        return buf.toString();
     }
 
 }
