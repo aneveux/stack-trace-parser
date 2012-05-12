@@ -37,7 +37,7 @@ public final class NStackTrace {
     private final NTrace trace;
 
     private NStackTrace(String threadName, NTrace stack) {
-        this.threadName = threadName;
+        this.threadName = Utils.strip(threadName, "\"");
         this.trace = stack;
     }
 

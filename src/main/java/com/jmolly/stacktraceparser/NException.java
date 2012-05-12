@@ -38,7 +38,7 @@ public final class NException {
 
     private NException(String className, String message) {
         this.className = className;
-        this.message = message;
+        this.message = Utils.strip(message, "\t\n ");
     }
 
     public String getClassName() {

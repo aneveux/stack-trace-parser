@@ -30,7 +30,6 @@ package test.stacktraceparser;
 import com.jmolly.stacktraceparser.NStackTrace;
 import com.jmolly.stacktraceparser.StackTraceParser;
 import org.antlr.runtime.RecognitionException;
-import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -41,7 +40,7 @@ import static org.testng.Assert.assertEquals;
 public class BasicTest {
 
     public void testParser() throws IOException, RecognitionException {
-        NStackTrace result = StackTraceParser.parse(loadString("Basic.txt"));
+        NStackTrace result = StackTraceParser.parse(Utils.loadString("Basic.txt"));
         assertEquals(result.getThreadName(), "main");
         assertEquals(result.getTrace().getException().getClassName(), "java.lang.RuntimeException");
         assertEquals(result.getTrace().getException().getMessage(), ": java.lang.reflect.InvocationTargetException");
@@ -64,14 +63,6 @@ public class BasicTest {
         assertEquals(result.getTrace().getNested().getNested().getNested().getException().getMessage(), ": can't zap right now");
         assertEquals(result.getTrace().getNested().getNested().getNested().getFrames().size(), 3);
         assertEquals(result.getTrace().getNested().getNested().getNested().getNested(), null);
-    }
-
-    private static String loadString(String resource) {
-        try {
-            return IOUtils.toString(BasicTest.class.getResourceAsStream(resource));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

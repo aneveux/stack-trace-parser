@@ -45,7 +45,7 @@ Stack<NTrace> traces = new Stack<NTrace>();
 
 estack
 @init {traces.push(NTrace.start());}
-: ^(ESTACK ^(THR t=.*) ^(EXC ^(CLS CNAME?) ^(MSG MSGSTR?)) atlines cause?)
+: ^(ESTACK ^(PRELIM ^(THR t=.*) ^(EXC ^(CLS CNAME?) ^(MSG MSGSTR?))) atlines cause?)
 {NTrace curr = traces.pop();
 curr.setException(NException.create($CNAME.text,$MSGSTR.text));
 stackTrace=NStackTrace.withNameAndStack($t==null?"":$t.getText(), curr);};

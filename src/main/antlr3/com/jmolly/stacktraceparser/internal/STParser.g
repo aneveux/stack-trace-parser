@@ -46,26 +46,33 @@ METH;
 MNAME;
 LOC;
 THR;
+TNAME;
+PRELIM;
 }
 
 @header {
 package com.jmolly.stacktraceparser.internal;
 }
 
-estack: (EIT threadname)? classname? msg=message? atlines cause? EOF
--> ^(ESTACK ^(THR threadname?) ^(EXC ^(CLS classname?) ^(MSG message?)) atlines cause?);
+estack: prelim atlines (WS cause)? EOF
+-> ^(ESTACK prelim atlines cause?);
 
-threadname: QS;
-atlines: atline* -> ^(ATS atline*);
-atline: AT classname DOT methodname location -> ^(AT ^(CLS classname) ^(METH methodname) ^(LOC location));
+prelim: (EIT WS threadname WS)? (classname WS?)? message?
+-> ^(PRELIM ^(THR threadname?) ^(EXC ^(CLS classname?) ^(MSG message?)));
+
+threadname: ((QS)=> QS | .*) -> {new CommonTree(new CommonToken(TNAME,$threadname.text))};
+atlines
+@init { consumeUntil(input, AT); }
+: (atline WS?)+ -> ^(ATS atline*);
+atline: AT WS classname DOT methodname location -> ^(AT ^(CLS classname) ^(METH methodname) ^(LOC location));
 
 location: LP sourcefile (COLON NUMBER)? RP;
 sourcefile: (NMETH|UNSRC|identifier (DOT fileext)?);
 
-cause: CB classname message? atlines moreline? cause?
+cause: CB WS classname WS? message? atlines (WS moreline)? (WS cause)?
 -> ^(CAUSE ^(EXC ^(CLS classname) ^(MSG message?)) atlines ^(MORE moreline?) cause?);
 
-moreline: ELLIPSIES NUMBER MORE;
+moreline: ELLIPSIES WS NUMBER WS MORE;
 
 message: COLON (options {greedy=false;}:.)*
  -> {new CommonTree(new CommonToken(MSGSTR,$message.text))};

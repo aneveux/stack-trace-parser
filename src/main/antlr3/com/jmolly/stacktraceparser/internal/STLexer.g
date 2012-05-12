@@ -49,12 +49,12 @@ JAVA:'java';
 
 QS:'"' .* '"' {setText(getText().substring(1, getText().length()-1));};
 
-WSS:WS+ {$channel=HIDDEN;};
+WS:WSC+;
 NUMBER:Digit+;
 IDENTIFIER:JavaIdentifier;
-CHAR:~WS;
+CHAR:~WSC;
 
-fragment WS:(' '|'\t'|'\n'|'\r');
+fragment WSC:(' '|'\t'|'\n'|'\r');
 fragment Upper:'A'..'Z';
 fragment Lower:'a'..'z';
 fragment Digit:'0'..'9';

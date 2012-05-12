@@ -30,7 +30,6 @@ package test.stacktraceparser;
 import com.jmolly.stacktraceparser.NStackTrace;
 import com.jmolly.stacktraceparser.StackTraceParser;
 import org.antlr.runtime.RecognitionException;
-import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -41,7 +40,7 @@ import static org.testng.Assert.assertEquals;
 public class LongestTest {
 
     public void testParser() throws IOException, RecognitionException {
-        NStackTrace result = StackTraceParser.parse(loadString("Longest.txt"));
+        NStackTrace result = StackTraceParser.parse(Utils.loadString("Longest.txt"));
         assertEquals(result.getThreadName(), "AWT-EventQueue-0");
         assertEquals(result.getTrace().getException().getClassName(), "java.lang.StackOverflowError");
         assertEquals(result.getTrace().getException().getMessage(), null);
@@ -50,14 +49,6 @@ public class LongestTest {
         int last = result.getTrace().getFrames().size() - 1;
         assertEquals(result.getTrace().getFrames().get(last).getClassName(), "clojure.lang.Reflector");
         assertEquals(result.getTrace().getFrames().get(last).getMethodName(), "invokeMatchingMethod");
-    }
-
-    private static String loadString(String resource) {
-        try {
-            return IOUtils.toString(LongestTest.class.getResourceAsStream(resource));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }
