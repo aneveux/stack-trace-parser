@@ -79,7 +79,7 @@ message: COLON (options {greedy=false;}:.)*
 
 classname: (identifier DOT)* identifier (DOLL identifier)?
  -> {new CommonTree(new CommonToken(CNAME,$classname.text))};
-methodname: (identifier|INIT)
+methodname: (identifier|INIT|CLINIT)
  -> {new CommonTree(new CommonToken(MNAME,$methodname.text))};
 
 identifier: (IDENTIFIER|AT|IN|MORE|JAVA);

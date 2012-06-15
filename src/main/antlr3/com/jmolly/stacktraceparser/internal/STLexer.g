@@ -42,6 +42,7 @@ CB:'Caused by:';
 NMETH:'Native Method';
 UNSRC:'Unknown Source';
 INIT:'<init>';
+CLINIT:'<clinit>';
 AT:'at';
 IN:'in';
 MORE:'more';
